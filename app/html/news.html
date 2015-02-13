@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    var count = 20;
+    function refresh() {
+        $("#news").html("");
+        getNews();
+    }
+    function getNews() {
+        rss.parser({
+            FeedUrl: cricketConfig.newsFeedUrl,
+            MaxCount: count
+        }, successCb);
+    }
+    function successCb(data) {
+        var s = '';
+        var entries = data.responseData.feed.entries;
+        $.each(entries, function (e, item) {
+            s += '<div class="news"><div class="news_title"><a href="' + item.link + '" target="_blank">' + item.title + "</a></div>";
+            if (item.content) {
+                s += '<div class="new_desc">' + item.content + "</div>";
+            }
+            var dt = item.publishedDate;
+            if (dt) {
+                s += '<br/><div class="news_date">' + dt + "</div>";
+            }
+            s += "</div>";
+        });
+        $("#news").html(s);
+    }
+    $(function () {
+       getNews(); 
+    });    
+</script>
+<div id="main">
+    <div id="news"></div>
+</div>

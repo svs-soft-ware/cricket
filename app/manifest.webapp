@@ -1,0 +1,17 @@
+{
+  "name": "cricket",
+  "version": "1.0.0",
+  "description": "cricket app is to get the overview of cricket scores and news",
+  "launch_path": "/html/index.html",
+  "developer": {
+    "name": "svs.soft.ware",
+    "url": "http://subin.comlu.com/"
+  },
+  "icons": {
+    "128": "/images/icon-128.png"
+  },
+  "orientation": [
+    "portrait"
+  ],
+  "default_locale": "en"
+}

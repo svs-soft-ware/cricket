@@ -1,0 +1,63 @@
+<script type="text/javascript">
+    var count = 10, refreshInterval = 10000;
+    function refresh() {
+        $("#live_score").html("");
+        getLivescore();
+    }
+    function getLivescore() {
+        var auto_flag = parseInt(localStorage.getItem("autoRefresh"));
+        if (auto_flag === 1) {
+            autoInterval = setInterval(function () {
+                rss.parser({
+                    FeedUrl: cricketConfig.liveFeedUrl,
+                    MaxCount: count
+                }, successCb);
+            }, refreshInterval);
+        }
+        rss.parser({
+            FeedUrl: cricketConfig.liveFeedUrl,
+            MaxCount: count
+        }, successCb);
+    }
+    function successCb(data) {
+        var s = '';
+        var entries = data.responseData.feed.entries;
+        $.each(entries, function (e, item) {
+            s += '<div class="feedEkList"><div class="itemTitle"><a href="' + item.link + '" target="_blank">' + item.title + "</a></div>";
+            var dt = item.publishedDate;
+            if (dt) {
+                s += '<div class="itemDate">' + dt + "</div>";
+            }
+            s += "</div>";
+        });
+        $("#live_score").html(s);
+    }
+    $(function () {
+        var auto_flag = parseInt(localStorage.getItem("autoRefresh"));
+        if (auto_flag === 1) {
+            $('#auto_flag_off').hide();
+        } else {
+            $('#auto_flag_on').hide();
+        }
+        getLivescore();
+        $("button").click(function () { //Auto refresh on/off
+            var auto_flag = parseInt(localStorage.getItem("autoRefresh"));
+            if (auto_flag === 1) {
+                clearInterval(autoInterval);
+                localStorage.setItem("autoRefresh", "0");
+            } else {
+                localStorage.setItem("autoRefresh", "1");
+                getLivescore();
+            }
+            $(".auto_refresh").toggle();
+        });
+    });
+</script>
+<div id="main">
+    <div style="text-align: right;padding:2px 2px 0 0;">
+        <span class="refresh_text">Auto Refresh is : </span>
+        <button id="auto_flag_on" class="auto_refresh auto_refresh_on">ON</button>
+        <button id="auto_flag_off" class="auto_refresh auto_refresh_off">OFF</button>
+    </div>
+    <div id="live_score">Loading...</div>
+</div>
