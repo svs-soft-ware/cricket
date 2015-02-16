@@ -14,7 +14,7 @@
         var s = '';
         var entries = data.responseData.feed.entries;
         $.each(entries, function (e, item) {
-            s += '<div class="news"><div class="news_title"><a href="' + item.link + '" target="_blank">' + item.title + "</a></div>";
+            s += '<div class="news"><div class="news_title" data-href="' + item.link + '" onclick="openUrl(this)"><a href="#">' + item.title + "</a></div>";
             if (item.content) {
                 s += '<div class="new_desc">' + item.content + "</div>";
             }
@@ -27,9 +27,11 @@
         $("#news").html(s);
     }
     $(function () {
-       getNews(); 
-    });    
+        getNews();
+    });
 </script>
 <div id="main">
-    <div id="news"></div>
+    <div id="news">
+        <img class="splash" src="../images/ajax-loader.gif" alt=""/>
+    </div>
 </div>

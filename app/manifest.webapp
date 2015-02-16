@@ -1,7 +1,7 @@
 {
   "name": "cricket",
   "version": "1.0.0",
-  "description": "cricket app is to get the overview of cricket scores and news",
+  "description": "Live Cricket Scores & News",
   "launch_path": "/html/index.html",
   "developer": {
     "name": "svs.soft.ware",

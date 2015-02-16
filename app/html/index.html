@@ -15,10 +15,10 @@
             var autoInterval;
             $(function () {
                 var auto_flag = parseInt(localStorage.getItem("autoRefresh"));
-                if(auto_flag !== 1 && auto_flag !== 0) {
+                if (auto_flag !== 1 && auto_flag !== 0) {
                     localStorage.setItem("autoRefresh", "1");
                 }
-                $("#main").load("live.html");//Loading side bar
+                $("#main").load("news.html");//Loading side bar
                 $('.button').on('click', function () {
                     $('.content').toggleClass('isOpen');
                 });
@@ -34,6 +34,10 @@
                 $('#header_title').html(title);
                 $("#main").load(page + ".html");
             }
+            function openUrl(elem) {
+                window.open($(elem).data('href'), 'cricket');
+                return;
+            }
         </script>
     </head>
     <body role="application">
@@ -41,27 +45,29 @@
             <nav class="clear">
                 <div class="sidebar_head">Cricket</div>              
                 <ul>
-                    <li class="shopping"><a href="#" onclick="loadHtml('live', 'Livescore');">Livescore</a></li>                    
+                    <li class="shopping"><a href="#" onclick="loadHtml('news', 'Cricket News');">Cricket News</a></li>                                        
                 </ul>
                 <ul>
-                    <li class="shopping"><a href="#" onclick="loadHtml('news', 'Cricket News');">Cricket News</a></li>
+                    <li class="shopping"><a href="#" onclick="loadHtml('live', 'Livescore');">Livescore</a></li>
                 </ul>                
                 <ul>
                     <li class="business"><a href="#" onclick="loadHtml('about', 'About');">About</a></li>
                 </ul>                
             </nav> 
         </div>
-        <div class='content'>
+        <div class="content">
             <section role="region">
                 <header>
                     <button class="button"><span class="icon icon-menu">menu</span></button>
                     <menu type="toolbar">
                         <input class="btn_refresh" type="button" value="Refresh" onclick="refresh();"/>
                     </menu>
-                    <h1 id="header_title">Livescore</h1>
+                    <h1 id="header_title">Cricket News</h1>
                 </header>
             </section>
-            <div id="main" class="main"></div>
+            <div id="main" class="main">
+                <img class="splash" src="../images/ajax-loader.gif" alt=""/>
+            </div>
         </div>     
     </body>
 </html>
