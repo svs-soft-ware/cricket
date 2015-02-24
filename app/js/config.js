@@ -6,3 +6,4 @@ var cricketConfig = (function () {
         liveFeedUrl: 'http://static.cricinfo.com/rss/livescores.xml'
     };
 })();
+//http://synd.cricbuzz.com/j2me/1.0/livematches.xml

@@ -40,7 +40,7 @@
             $('#auto_flag_on').hide();
         }
         getLivescore();
-        $("button").click(function () { //Auto refresh on/off
+        $(".auto_refresh").click(function () { //Auto refresh on/off
             var auto_flag = parseInt(localStorage.getItem("autoRefresh"));
             if (auto_flag === 1) {
                 clearInterval(autoInterval);
